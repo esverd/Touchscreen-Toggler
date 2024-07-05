@@ -13,5 +13,19 @@ namespace Touchscreen_Toggler
     /// </summary>
     public partial class App : Application
     {
+        private NotifyIconWrapper _notifyIcon;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            _notifyIcon = new NotifyIconWrapper();
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _notifyIcon.Dispose();
+            base.OnExit(e);
+        }
     }
+
 }
