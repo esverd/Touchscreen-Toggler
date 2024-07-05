@@ -63,7 +63,7 @@ namespace Touchscreen_Toggler
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
             foreach (ManagementObject device in searcher.Get())
             {
-                return device["DeviceID"].ToString();
+                return device["DeviceID"]?.ToString();
             }
             return null;
         }
