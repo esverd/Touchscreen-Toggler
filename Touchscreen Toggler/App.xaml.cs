@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Touchscreen_Toggler
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private NotifyIconWrapper _notifyIcon;
 
+        public App()
+        {
+            _notifyIcon = new NotifyIconWrapper();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            _notifyIcon = new NotifyIconWrapper();
+            // _notifyIcon initialization is moved to the constructor
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -27,5 +23,4 @@ namespace Touchscreen_Toggler
             base.OnExit(e);
         }
     }
-
 }
