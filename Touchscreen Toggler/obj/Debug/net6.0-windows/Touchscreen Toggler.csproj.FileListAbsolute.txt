@@ -3,3 +3,5 @@ C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggle
 C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\App.g.cs
 C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler_MarkupCompile.cache
 C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler_MarkupCompile.lref
+C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\SettingsWindow.baml
+C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\SettingsWindow.g.cs

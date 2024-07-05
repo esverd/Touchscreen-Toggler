@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "6fzby49ThAK2nefSS+RYjNzwMdKXHuWex6rxEaBaL1bUGCMX66LcMgdTSoo0uesm0J1e8MpYrKHBFqDyc1gPNw==",
+  "dgSpecHash": "1LFtLhpEBbWCa36RmeEja4a8J+HE+n+LBr2E7eyD0pt4UTepmGFPB2yxtPs+ksPepGankn7DbVmhQJRAJPmkVg==",
   "success": true,
   "projectFilePath": "C:\\D\\CREATIVE WIP\\Cs, Touchscreen Toggler\\Touchscreen Toggler\\Touchscreen Toggler\\Touchscreen Toggler.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\eirik\\.nuget\\packages\\hardcodet.notifyicon.wpf\\1.1.0\\hardcodet.notifyicon.wpf.1.1.0.nupkg.sha512"
+    "C:\\Users\\eirik\\.nuget\\packages\\hardcodet.notifyicon.wpf\\1.1.0\\hardcodet.notifyicon.wpf.1.1.0.nupkg.sha512",
+    "C:\\Users\\eirik\\.nuget\\packages\\system.codedom\\8.0.0\\system.codedom.8.0.0.nupkg.sha512",
+    "C:\\Users\\eirik\\.nuget\\packages\\system.management\\8.0.0\\system.management.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }
