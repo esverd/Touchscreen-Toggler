@@ -1,0 +1,5 @@
+C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler.csproj.AssemblyReference.cache
+C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\App.g.cs
+C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler_MarkupCompile.cache
+C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler_MarkupCompile.lref
