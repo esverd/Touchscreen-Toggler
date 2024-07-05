@@ -14,7 +14,7 @@ namespace Touchscreen_Toggler
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            // _notifyIcon initialization is moved to the constructor
+            // Application starts without a main window
         }
 
         protected override void OnExit(ExitEventArgs e)
