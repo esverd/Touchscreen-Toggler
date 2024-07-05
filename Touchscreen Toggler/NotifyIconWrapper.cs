@@ -16,14 +16,12 @@ namespace Touchscreen_Toggler
             {
                 Icon = SystemIcons.Application,
                 Visible = true,
-                ContextMenu = new ContextMenu(new[]
-                {
-                new MenuItem("Enable Touchscreen", EnableTouchscreen),
-                new MenuItem("Disable Touchscreen", DisableTouchscreen),
-                new MenuItem("Settings", OpenSettings),
-                new MenuItem("Exit", Exit)
-            })
+                ContextMenuStrip = new ContextMenuStrip()
             };
+            _notifyIcon.ContextMenuStrip.Items.Add("Enable Touchscreen", null, EnableTouchscreen);
+            _notifyIcon.ContextMenuStrip.Items.Add("Disable Touchscreen", null, DisableTouchscreen);
+            _notifyIcon.ContextMenuStrip.Items.Add("Settings", null, OpenSettings);
+            _notifyIcon.ContextMenuStrip.Items.Add("Exit", null, Exit);
         }
 
         private void EnableTouchscreen(object sender, EventArgs e)
