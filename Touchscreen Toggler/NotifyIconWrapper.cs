@@ -36,7 +36,7 @@ namespace Touchscreen_Toggler
 
         private void OpenSettings(object sender, EventArgs e)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
                 var settingsWindow = new SettingsWindow();
                 settingsWindow.Show();
@@ -45,7 +45,7 @@ namespace Touchscreen_Toggler
 
         private void Exit(object sender, EventArgs e)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void ToggleTouchscreen(bool enable)
