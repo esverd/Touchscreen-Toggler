@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Management;
+using Touchscreen_Toggler.Properties;
 
 namespace Touchscreen_Toggler
 {
@@ -30,9 +31,10 @@ namespace Touchscreen_Toggler
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             // Save the selected device (for future use, if necessary)
-            // This could involve saving to a configuration file or similar
+            Properties.Settings.Default.SelectedDevice = DeviceList.SelectedItem?.ToString();
+            Properties.Settings.Default.Save();
             MessageBox.Show("Device saved");
-            Close();
+            this.Hide(); // Use Hide instead of Close to keep the application running
         }
     }
 }

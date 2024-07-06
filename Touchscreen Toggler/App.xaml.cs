@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Touchscreen_Toggler.Properties;
 
 namespace Touchscreen_Toggler
 {

@@ -1,12 +1,3 @@
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\bin\Debug\net6.0-windows\Touchscreen Toggler.exe
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\bin\Debug\net6.0-windows\Touchscreen Toggler.deps.json
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\bin\Debug\net6.0-windows\Touchscreen Toggler.runtimeconfig.json
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\bin\Debug\net6.0-windows\Touchscreen Toggler.dll
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\bin\Debug\net6.0-windows\Touchscreen Toggler.pdb
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\bin\Debug\net6.0-windows\Hardcodet.NotifyIcon.Wpf.dll
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\bin\Debug\net6.0-windows\System.CodeDom.dll
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\bin\Debug\net6.0-windows\System.Management.dll
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Management.dll
 C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler.csproj.AssemblyReference.cache
 C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\SettingsWindow.baml
 C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\SettingsWindow.g.cs
@@ -17,9 +8,3 @@ C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggle
 C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler.AssemblyInfoInputs.cache
 C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler.AssemblyInfo.cs
 C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler.csproj.CoreCompileInputs.cache
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler.csproj.CopyComplete
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler.dll
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\refint\Touchscreen Toggler.dll
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler.pdb
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\Touchscreen Toggler.genruntimeconfig.cache
-C:\D\CREATIVE WIP\Cs, Touchscreen Toggler\Touchscreen Toggler\Touchscreen Toggler\obj\Debug\net6.0-windows\ref\Touchscreen Toggler.dll

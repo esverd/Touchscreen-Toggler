@@ -4,6 +4,7 @@ using System.Management;
 using System.Windows;
 using System.Windows.Forms;
 using Touchscreen_Toggler;
+using System.Configuration;
 
 public class NotifyIconWrapper : IDisposable
 {
