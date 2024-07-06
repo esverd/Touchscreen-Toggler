@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using Touchscreen_Toggler.Properties;
+using Touchscreen_Toggler.Properties; 
 
 namespace Touchscreen_Toggler
 {
@@ -16,7 +16,7 @@ namespace Touchscreen_Toggler
         {
             base.OnStartup(e);
             // Load the selected device from settings
-            string selectedDevice = Properties.Settings.Default.SelectedDevice;
+            string selectedDevice = Settings.Default.SelectedDevice;
             if (!string.IsNullOrEmpty(selectedDevice))
             {
                 // Use the saved device ID if available
