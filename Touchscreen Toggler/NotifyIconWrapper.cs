@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Management;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using System.Windows;
+using System.Windows.Forms;
 using Touchscreen_Toggler;
-
-
 
 public class NotifyIconWrapper : IDisposable
 {
@@ -23,6 +20,7 @@ public class NotifyIconWrapper : IDisposable
         };
 
         UpdateContextMenu();
+        ShowStartupNotification();
     }
 
     private void UpdateContextMenu()
@@ -37,7 +35,7 @@ public class NotifyIconWrapper : IDisposable
             _notifyIcon.ContextMenuStrip.Items.Add("Enable Touchscreen", null, ToggleTouchscreen);
         }
         _notifyIcon.ContextMenuStrip.Items.Add("Settings", null, OpenSettings);
-        _notifyIcon.ContextMenuStrip.Items.Add("Exit", null, Exit);
+        _notifyIcon.ContextMenuStrip.Items.Add("Quit", null, Exit); // Changed "Exit" to "Quit"
     }
 
     private bool IsTouchscreenEnabled()
@@ -68,7 +66,7 @@ public class NotifyIconWrapper : IDisposable
             SetDeviceState(deviceId, enable);
             UpdateContextMenu();
         }
-        catch (Exception ex)
+        catch (ManagementException ex)
         {
             System.Windows.MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -109,10 +107,15 @@ public class NotifyIconWrapper : IDisposable
         return null;
     }
 
+    private void ShowStartupNotification()
+    {
+        _notifyIcon.BalloonTipTitle = "Touchscreen Toggler";
+        _notifyIcon.BalloonTipText = "The application has started successfully.";
+        _notifyIcon.ShowBalloonTip(3000); // Show notification for 3 seconds
+    }
+
     public void Dispose()
     {
         _notifyIcon.Dispose();
     }
 }
-
-

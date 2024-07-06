@@ -14,7 +14,13 @@ namespace Touchscreen_Toggler
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            // Application starts without a main window
+            // Load the selected device from settings
+            string selectedDevice = Properties.Settings.Default.SelectedDevice;
+            if (!string.IsNullOrEmpty(selectedDevice))
+            {
+                // Use the saved device ID if available
+                // Implement logic to use this device ID
+            }
         }
 
         protected override void OnExit(ExitEventArgs e)
