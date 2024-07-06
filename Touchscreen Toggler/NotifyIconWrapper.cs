@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Management;
-using System.Windows;
 using System.Windows.Forms;
-using Touchscreen_Toggler;
-using System.Configuration;
+using Touchscreen_Toggler.Properties;
+using System.Windows; // Add this for System.Windows.MessageBox
+using Touchscreen_Toggler; // Ensure this is added
 
 public class NotifyIconWrapper : IDisposable
 {
@@ -36,7 +36,7 @@ public class NotifyIconWrapper : IDisposable
             _notifyIcon.ContextMenuStrip.Items.Add("Enable Touchscreen", null, ToggleTouchscreen);
         }
         _notifyIcon.ContextMenuStrip.Items.Add("Settings", null, OpenSettings);
-        _notifyIcon.ContextMenuStrip.Items.Add("Quit", null, Exit); // Changed "Exit" to "Quit"
+        _notifyIcon.ContextMenuStrip.Items.Add("Quit", null, Exit);
     }
 
     private bool IsTouchscreenEnabled()
@@ -44,10 +44,17 @@ public class NotifyIconWrapper : IDisposable
         string? deviceId = GetTouchscreenDeviceId();
         if (string.IsNullOrEmpty(deviceId)) return false;
 
-        var searcher = new ManagementObjectSearcher($"SELECT * FROM Win32_PnPEntity WHERE DeviceID = '{deviceId.Replace("\\", "\\\\")}'");
-        foreach (ManagementObject device in searcher.Get())
+        try
         {
-            return device["Status"].ToString() == "OK";
+            var searcher = new ManagementObjectSearcher($"SELECT * FROM Win32_PnPEntity WHERE DeviceID = '{deviceId.Replace("\\", "\\\\")}'");
+            foreach (ManagementObject device in searcher.Get())
+            {
+                return device["Status"].ToString() == "OK";
+            }
+        }
+        catch (ManagementException ex)
+        {
+            System.Windows.MessageBox.Show($"Error checking touchscreen status: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         return false;
     }
@@ -69,17 +76,31 @@ public class NotifyIconWrapper : IDisposable
         }
         catch (ManagementException ex)
         {
-            System.Windows.MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"ManagementException: {ex.Message}\nDetails: {ex.InnerException?.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            // Optionally, log the error details to a file or event log for further investigation
+        }
+        catch (Exception ex)
+        {
+            System.Windows.MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            // Optionally, log the error details to a file or event log for further investigation
         }
     }
 
     private void SetDeviceState(string deviceId, bool enable)
     {
-        string query = $"SELECT * FROM Win32_PnPEntity WHERE DeviceID = '{deviceId.Replace("\\", "\\\\")}'";
-        var searcher = new ManagementObjectSearcher(query);
-        foreach (ManagementObject device in searcher.Get())
+        try
         {
-            device.InvokeMethod(enable ? "Enable" : "Disable", new object[] { false });
+            string query = $"SELECT * FROM Win32_PnPEntity WHERE DeviceID = '{deviceId.Replace("\\", "\\\\")}'";
+            var searcher = new ManagementObjectSearcher(query);
+            foreach (ManagementObject device in searcher.Get())
+            {
+                device.InvokeMethod(enable ? "Enable" : "Disable", new object[] { false });
+            }
+        }
+        catch (ManagementException ex)
+        {
+            System.Windows.MessageBox.Show($"Error setting device state: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            throw;
         }
     }
 
@@ -99,11 +120,18 @@ public class NotifyIconWrapper : IDisposable
 
     private string? GetTouchscreenDeviceId()
     {
-        string query = "SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%HID-compliant touch screen%'";
-        var searcher = new ManagementObjectSearcher(query);
-        foreach (ManagementObject device in searcher.Get())
+        try
         {
-            return device["DeviceID"]?.ToString();
+            string query = "SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%HID-compliant touch screen%'";
+            var searcher = new ManagementObjectSearcher(query);
+            foreach (ManagementObject device in searcher.Get())
+            {
+                return device["DeviceID"]?.ToString();
+            }
+        }
+        catch (ManagementException ex)
+        {
+            System.Windows.MessageBox.Show($"Error retrieving touchscreen device ID: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         return null;
     }

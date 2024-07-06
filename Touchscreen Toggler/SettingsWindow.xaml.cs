@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Management;
-using Touchscreen_Toggler.Properties; 
+using Touchscreen_Toggler.Properties;
 
 namespace Touchscreen_Toggler
 {
@@ -10,6 +10,13 @@ namespace Touchscreen_Toggler
         {
             InitializeComponent();
             LoadDevices();
+            this.Closing += SettingsWindow_Closing;
+        }
+
+        private void SettingsWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true; // Cancel the closing event
+            this.Hide(); // Hide the window instead
         }
 
         private void LoadDevices()
