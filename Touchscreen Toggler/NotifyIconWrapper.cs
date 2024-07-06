@@ -225,7 +225,7 @@ public class NotifyIconWrapper : IDisposable
     {
         _notifyIcon.BalloonTipTitle = "Touchscreen Toggler";
         _notifyIcon.BalloonTipText = "The application has started successfully.";
-        _notifyIcon.ShowBalloonTip(3000); // Show notification for 3 seconds
+        _notifyIcon.ShowBalloonTip(2000); // Show notification for 2 seconds
     }
 
     public void Dispose()
