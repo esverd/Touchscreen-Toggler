@@ -1,9 +1,12 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Management;
-using Touchscreen_Toggler;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using System.Windows;
+using Touchscreen_Toggler;
+
+
 
 public class NotifyIconWrapper : IDisposable
 {
@@ -42,8 +45,7 @@ public class NotifyIconWrapper : IDisposable
         string? deviceId = GetTouchscreenDeviceId();
         if (string.IsNullOrEmpty(deviceId)) return false;
 
-        string query = $"SELECT * FROM Win32_PnPEntity WHERE DeviceID = \"{deviceId.Replace("\\", "\\\\").Replace("\"", "\\\"")}\"";
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
+        var searcher = new ManagementObjectSearcher($"SELECT * FROM Win32_PnPEntity WHERE DeviceID = '{deviceId.Replace("\\", "\\\\")}'");
         foreach (ManagementObject device in searcher.Get())
         {
             return device["Status"].ToString() == "OK";
@@ -53,34 +55,32 @@ public class NotifyIconWrapper : IDisposable
 
     private void ToggleTouchscreen(object? sender, EventArgs e)
     {
-        bool enable = !IsTouchscreenEnabled();
         string? deviceId = GetTouchscreenDeviceId();
-        if (string.IsNullOrEmpty(deviceId)) return;
-
-        string command = enable ? "enable" : "disable";
-        string devconPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "devcon.exe");
-
-        var startInfo = new System.Diagnostics.ProcessStartInfo
+        if (string.IsNullOrEmpty(deviceId))
         {
-            FileName = devconPath,
-            Arguments = $"{command} \"{deviceId}\"",
-            RedirectStandardOutput = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        };
+            System.Windows.MessageBox.Show("Touchscreen device not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
 
+        bool enable = !IsTouchscreenEnabled();
         try
         {
-            using (var process = System.Diagnostics.Process.Start(startInfo))
-            {
-                process?.WaitForExit();
-                string output = process?.StandardOutput.ReadToEnd();
-                UpdateContextMenu();
-            }
+            SetDeviceState(deviceId, enable);
+            UpdateContextMenu();
         }
         catch (Exception ex)
         {
             System.Windows.MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void SetDeviceState(string deviceId, bool enable)
+    {
+        string query = $"SELECT * FROM Win32_PnPEntity WHERE DeviceID = '{deviceId.Replace("\\", "\\\\")}'";
+        var searcher = new ManagementObjectSearcher(query);
+        foreach (ManagementObject device in searcher.Get())
+        {
+            device.InvokeMethod(enable ? "Enable" : "Disable", new object[] { false });
         }
     }
 
@@ -101,7 +101,7 @@ public class NotifyIconWrapper : IDisposable
     private string? GetTouchscreenDeviceId()
     {
         string query = "SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%HID-compliant touch screen%'";
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
+        var searcher = new ManagementObjectSearcher(query);
         foreach (ManagementObject device in searcher.Get())
         {
             return device["DeviceID"]?.ToString();
@@ -114,3 +114,5 @@ public class NotifyIconWrapper : IDisposable
         _notifyIcon.Dispose();
     }
 }
+
+
