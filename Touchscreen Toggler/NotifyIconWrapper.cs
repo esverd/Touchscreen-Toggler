@@ -10,6 +10,7 @@ using Touchscreen_Toggler;
 public class NotifyIconWrapper : IDisposable
 {
     private readonly NotifyIcon _notifyIcon;
+    public string SelectedDeviceId { get; set; }
 
     public NotifyIconWrapper()
     {
@@ -42,7 +43,7 @@ public class NotifyIconWrapper : IDisposable
 
     private bool IsTouchscreenEnabled()
     {
-        string? deviceId = GetTouchscreenDeviceId();
+        string deviceId = Settings.Default.SelectedDevice;
         if (string.IsNullOrEmpty(deviceId)) return false;
 
         try
@@ -60,9 +61,9 @@ public class NotifyIconWrapper : IDisposable
         return false;
     }
 
-    private void ToggleTouchscreen(object? sender, EventArgs e)
+    private void ToggleTouchscreen(object sender, EventArgs e)
     {
-        string? deviceId = GetTouchscreenDeviceId();
+        string deviceId = Settings.Default.SelectedDevice;
         if (string.IsNullOrEmpty(deviceId))
         {
             System.Windows.MessageBox.Show("Touchscreen device not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -189,7 +190,7 @@ public class NotifyIconWrapper : IDisposable
     private const int DICS_DISABLE = 0x02;
     private const int DICS_FLAG_GLOBAL = 0x01;
 
-    private void OpenSettings(object? sender, EventArgs e)
+    private void OpenSettings(object sender, EventArgs e)
     {
         System.Windows.Application.Current.Dispatcher.Invoke(() =>
         {
@@ -198,34 +199,16 @@ public class NotifyIconWrapper : IDisposable
         });
     }
 
-    private void Exit(object? sender, EventArgs e)
+    private void Exit(object sender, EventArgs e)
     {
         System.Windows.Application.Current.Shutdown();
-    }
-
-    private string? GetTouchscreenDeviceId()
-    {
-        try
-        {
-            string query = "SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%HID-compliant touch screen%'";
-            var searcher = new ManagementObjectSearcher(query);
-            foreach (ManagementObject device in searcher.Get())
-            {
-                return device["DeviceID"]?.ToString();
-            }
-        }
-        catch (ManagementException ex)
-        {
-            System.Windows.MessageBox.Show($"Error retrieving touchscreen device ID: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-        return null;
     }
 
     private void ShowStartupNotification()
     {
         _notifyIcon.BalloonTipTitle = "Touchscreen Toggler";
         _notifyIcon.BalloonTipText = "The application has started successfully.";
-        _notifyIcon.ShowBalloonTip(2000); // Show notification for 2 seconds
+        _notifyIcon.ShowBalloonTip(2000);
     }
 
     public void Dispose()

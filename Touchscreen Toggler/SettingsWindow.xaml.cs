@@ -26,8 +26,9 @@ namespace Touchscreen_Toggler
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
             foreach (ManagementObject device in searcher.Get())
             {
-                DeviceList.Items.Add(device["Name"]);
+                DeviceList.Items.Add(device);
             }
+            DeviceList.DisplayMemberPath = "Name"; // Display the device name
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
@@ -37,11 +38,18 @@ namespace Touchscreen_Toggler
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // Save the selected device (for future use, if necessary)
-            Settings.Default.SelectedDevice = DeviceList.SelectedItem?.ToString();
-            Settings.Default.Save();
-            MessageBox.Show("Device saved");
-            this.Hide(); // Use Hide instead of Close to keep the application running
+            if (DeviceList.SelectedItem != null)
+            {
+                ManagementObject device = (ManagementObject)DeviceList.SelectedItem;
+                Settings.Default.SelectedDevice = device["DeviceID"].ToString();
+                Settings.Default.Save();
+                System.Windows.MessageBox.Show("Device saved", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Hide();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("No device selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
