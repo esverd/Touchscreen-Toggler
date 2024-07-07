@@ -20,7 +20,7 @@ namespace Touchscreen_Toggler
             string selectedDevice = Settings.Default.SelectedDevice;
             if (!string.IsNullOrEmpty(selectedDevice))
             {
-                // Logic to use the saved device ID
+                // Assign the selected device ID to the NotifyIconWrapper
                 _notifyIcon.SelectedDeviceId = selectedDevice;
             }
         }

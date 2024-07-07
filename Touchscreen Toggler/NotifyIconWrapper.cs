@@ -2,15 +2,17 @@
 using System.Drawing;
 using System.Management;
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Forms;
 using Touchscreen_Toggler.Properties;
 using Touchscreen_Toggler;
+using WpfMessageBox = System.Windows.MessageBox; // Alias for System.Windows.MessageBox
+using WpfMessageBoxButton = System.Windows.MessageBoxButton;
+using WpfMessageBoxImage = System.Windows.MessageBoxImage;
 
 public class NotifyIconWrapper : IDisposable
 {
     private readonly NotifyIcon _notifyIcon;
-    public string SelectedDeviceId { get; set; }
+    public string? SelectedDeviceId { get; set; } = string.Empty;
 
     public NotifyIconWrapper()
     {
@@ -43,7 +45,7 @@ public class NotifyIconWrapper : IDisposable
 
     private bool IsTouchscreenEnabled()
     {
-        string deviceId = Settings.Default.SelectedDevice;
+        string? deviceId = SelectedDeviceId;
         if (string.IsNullOrEmpty(deviceId)) return false;
 
         try
@@ -56,17 +58,17 @@ public class NotifyIconWrapper : IDisposable
         }
         catch (ManagementException ex)
         {
-            System.Windows.MessageBox.Show($"Error checking touchscreen status: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            WpfMessageBox.Show($"Error checking touchscreen status: {ex.Message}", "Error", WpfMessageBoxButton.OK, WpfMessageBoxImage.Error);
         }
         return false;
     }
 
-    private void ToggleTouchscreen(object sender, EventArgs e)
+    private void ToggleTouchscreen(object? sender, EventArgs e)
     {
-        string deviceId = Settings.Default.SelectedDevice;
+        string? deviceId = SelectedDeviceId;
         if (string.IsNullOrEmpty(deviceId))
         {
-            System.Windows.MessageBox.Show("Touchscreen device not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            WpfMessageBox.Show("Touchscreen device not found.", "Error", WpfMessageBoxButton.OK, WpfMessageBoxImage.Error);
             return;
         }
 
@@ -78,7 +80,7 @@ public class NotifyIconWrapper : IDisposable
         }
         catch (Exception ex)
         {
-            System.Windows.MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            WpfMessageBox.Show($"Error: {ex.Message}", "Error", WpfMessageBoxButton.OK, WpfMessageBoxImage.Error);
         }
     }
 
@@ -97,7 +99,7 @@ public class NotifyIconWrapper : IDisposable
 
             for (int i = 0; SetupDiEnumDeviceInfo(deviceInfoSet, i, ref deviceInfoData); i++)
             {
-                string currentDeviceId = GetDeviceId(deviceInfoSet, ref deviceInfoData);
+                string? currentDeviceId = GetDeviceId(deviceInfoSet, ref deviceInfoData);
                 if (currentDeviceId == deviceId)
                 {
                     SP_PROPCHANGE_PARAMS propChangeParams = new SP_PROPCHANGE_PARAMS();
@@ -125,7 +127,7 @@ public class NotifyIconWrapper : IDisposable
         }
     }
 
-    private string GetDeviceId(IntPtr deviceInfoSet, ref SP_DEVINFO_DATA deviceInfoData)
+    private string? GetDeviceId(IntPtr deviceInfoSet, ref SP_DEVINFO_DATA deviceInfoData)
     {
         uint requiredSize = 0;
         SetupDiGetDeviceInstanceId(deviceInfoSet, ref deviceInfoData, null, 0, ref requiredSize);
@@ -141,7 +143,7 @@ public class NotifyIconWrapper : IDisposable
     }
 
     [DllImport("setupapi.dll", SetLastError = true)]
-    private static extern IntPtr SetupDiGetClassDevs(IntPtr ClassGuid, string Enumerator, IntPtr hwndParent, uint Flags);
+    private static extern IntPtr SetupDiGetClassDevs(IntPtr ClassGuid, string? Enumerator, IntPtr hwndParent, uint Flags);
 
     [DllImport("setupapi.dll", SetLastError = true)]
     private static extern bool SetupDiEnumDeviceInfo(IntPtr DeviceInfoSet, int MemberIndex, ref SP_DEVINFO_DATA DeviceInfoData);
@@ -190,7 +192,7 @@ public class NotifyIconWrapper : IDisposable
     private const int DICS_DISABLE = 0x02;
     private const int DICS_FLAG_GLOBAL = 0x01;
 
-    private void OpenSettings(object sender, EventArgs e)
+    private void OpenSettings(object? sender, EventArgs e)
     {
         System.Windows.Application.Current.Dispatcher.Invoke(() =>
         {
@@ -199,7 +201,7 @@ public class NotifyIconWrapper : IDisposable
         });
     }
 
-    private void Exit(object sender, EventArgs e)
+    private void Exit(object? sender, EventArgs e)
     {
         System.Windows.Application.Current.Shutdown();
     }

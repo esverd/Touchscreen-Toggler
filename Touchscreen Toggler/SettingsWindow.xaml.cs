@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.ComponentModel;
 using System.Management;
 using Touchscreen_Toggler.Properties;
 
@@ -13,7 +14,7 @@ namespace Touchscreen_Toggler
             this.Closing += SettingsWindow_Closing;
         }
 
-        private void SettingsWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        private void SettingsWindow_Closing(object? sender, CancelEventArgs e)
         {
             e.Cancel = true; // Cancel the closing event
             this.Hide(); // Hide the window instead
@@ -43,12 +44,12 @@ namespace Touchscreen_Toggler
                 ManagementObject device = (ManagementObject)DeviceList.SelectedItem;
                 Settings.Default.SelectedDevice = device["DeviceID"].ToString();
                 Settings.Default.Save();
-                System.Windows.MessageBox.Show("Device saved", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Device saved", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Hide();
             }
             else
             {
-                System.Windows.MessageBox.Show("No device selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No device selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
