@@ -22,6 +22,7 @@ namespace Touchscreen_Toggler
             {
                 // Assign the selected device ID to the NotifyIconWrapper
                 _notifyIcon.SelectedDeviceId = selectedDevice;
+                _notifyIcon.UpdateContextMenu(); // Update the context menu based on the initial state
             }
         }
 

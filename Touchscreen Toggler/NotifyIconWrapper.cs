@@ -24,11 +24,10 @@ public class NotifyIconWrapper : IDisposable
             ContextMenuStrip = new ContextMenuStrip()
         };
 
-        UpdateContextMenu();
         ShowStartupNotification();
     }
 
-    private void UpdateContextMenu()
+    public void UpdateContextMenu()
     {
         _notifyIcon.ContextMenuStrip.Items.Clear();
         if (IsTouchscreenEnabled())
@@ -76,7 +75,7 @@ public class NotifyIconWrapper : IDisposable
         try
         {
             SetDeviceState(deviceId, enable);
-            UpdateContextMenu();
+            UpdateContextMenu(); // Update the context menu after toggling the state
         }
         catch (Exception ex)
         {
